@@ -20,6 +20,7 @@
 		35EBDA26254C5A3C00FBE8AB /* MeterTableOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDA24254C5A3C00FBE8AB /* MeterTableOC.m */; };
 		35EBDA2B254C615A00FBE8AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDA2A254C615A00FBE8AB /* Constants.swift */; };
 		35EBDA31254C9F0D00FBE8AB /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDA30254C9F0D00FBE8AB /* UIImage+Extension.swift */; };
+		35EBDA4125508A5200FBE8AB /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EBDA4025508A5200FBE8AB /* Data+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		35EBDA25254C5A3C00FBE8AB /* MeterTableOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterTableOC.h; sourceTree = "<group>"; };
 		35EBDA2A254C615A00FBE8AB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		35EBDA30254C9F0D00FBE8AB /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		35EBDA4025508A5200FBE8AB /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		4DD8CD044FE5ADD55DF61291 /* Pods_AudioRecorder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioRecorder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FAC7EB1079F6D791E3A6D41 /* Pods-AudioRecorder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioRecorder.debug.xcconfig"; path = "Target Support Files/Pods-AudioRecorder/Pods-AudioRecorder.debug.xcconfig"; sourceTree = "<group>"; };
 		9C34CF1B309F0E58C114A42D /* Pods-AudioRecorder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioRecorder.release.xcconfig"; path = "Target Support Files/Pods-AudioRecorder/Pods-AudioRecorder.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				356B8A22254B1D0000F51D21 /* UIViewController+Extension.swift */,
 				35EBDA30254C9F0D00FBE8AB /* UIImage+Extension.swift */,
+				35EBDA4025508A5200FBE8AB /* Data+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				356B8A2F254B7DEB00F51D21 /* RecorderViewModel.swift in Sources */,
 				356B8A27254B605100F51D21 /* ErrorMessage.swift in Sources */,
 				356B8A11254B137F00F51D21 /* RecorderViewController.swift in Sources */,
+				35EBDA4125508A5200FBE8AB /* Data+Extension.swift in Sources */,
 				356B8A0D254B137F00F51D21 /* AppDelegate.swift in Sources */,
 				356B8A0F254B137F00F51D21 /* SceneDelegate.swift in Sources */,
 			);

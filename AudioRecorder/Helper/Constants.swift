@@ -5,7 +5,7 @@
 //  Created by Rahul Garg on 30/10/20.
 //
 
-import Foundation
+import AVFoundation
 
 struct Constants {
     struct Waveform {
@@ -20,5 +20,6 @@ struct Constants {
     
     struct Audio {
         static let bufferSize = 4096
+        static let commonFormat: AVAudioCommonFormat = .pcmFormatFloat32
     }
 }

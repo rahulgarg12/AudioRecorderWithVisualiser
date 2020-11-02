@@ -51,8 +51,8 @@ final class RecorderViewController: UIViewController {
     
     // MARK: Helper Variables
     private var recorderState: RecordingState = .notInitiated
-    // save audio sets in this variable
-    private var audioBuffer = [AVAudioPCMBuffer]()
+    // save audio sets in this variable. Data type is byte array of type UInt8, holds bytes in a contiguous manner
+    private var audioBuffer = Data()
     private var timerStart: Date?
     private var audioDuration: Float64? {
         guard let audioFileUrl = viewModel.getAudioFileURL else { return nil }
@@ -195,7 +195,7 @@ extension RecorderViewController {
             showAlert(message: .inRecordingPlayTapped)
             
         case .recordingStopped:
-            //coinvert and write only if user has recorded a video and just after that plays the recording
+            //coinvert and write only if user has recorded a video and after that play the recording
             guard let audioFileURL = writeToFile() else {
                 showAlert(message: .writingAudioToFileFail)
                 return
@@ -241,7 +241,7 @@ extension RecorderViewController {
                             format: inputFormat)
         
         let mainMixerNode = audioEngine.mainMixerNode
-        let mixerFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32,
+        let mixerFormat = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
                                         sampleRate: inputFormat.sampleRate,
                                         channels: inputFormat.channelCount,
                                         interleaved: false)
@@ -280,8 +280,17 @@ extension RecorderViewController {
             return nil
         }
         
-        let tapNode: AVAudioNode = audioMixerNode
-        let format = tapNode.outputFormat(forBus: 0)
+        // byte array is converted which will be used to get the wav file
+        let inputFormat = audioEngine.inputNode.outputFormat(forBus: 0)
+        guard let format = AVAudioFormat(commonFormat: Constants.Audio.commonFormat,
+                                         sampleRate: inputFormat.sampleRate,
+                                         channels: inputFormat.channelCount,
+                                         interleaved: false),
+              let buffer = audioBuffer.toPCMBuffer(format: format)
+        else {
+            showAlert(message: .audioFormatFail)
+            return nil
+        }
         
         var audioFile: AVAudioFile?
         do {
@@ -291,14 +300,14 @@ extension RecorderViewController {
             return nil
         }
         
-        for audioBuffer in audioBuffer {
-            do {
-                try viewModel.writeToAudioFile(audioFile, audioBuffer: audioBuffer)
-            } catch {
-                print(error)
-            }
+        do {
+            // converted byte array is now converted into wav format
+            try viewModel.writeToAudioFile(audioFile, audioBuffer: buffer)
+        } catch {
+            print(error)
         }
         
+        // audioFileURL contains the path of the wav file
         return audioFileURL
     }
 }
@@ -312,8 +321,9 @@ extension RecorderViewController {
         
         tapNode.installTap(onBus: 0,
                            bufferSize: AVAudioFrameCount(Constants.Audio.bufferSize),
-                           format: format) { [weak self] (buffer, time) in
-            self?.audioBuffer.append(buffer)
+                           format: format) { [weak self] (buffer, _) in
+            let data = Data(buffer: buffer)
+            self?.audioBuffer.append(data)
         }
         
         do {

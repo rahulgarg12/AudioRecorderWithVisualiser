@@ -13,6 +13,7 @@ enum ErrorMessage: String {
     case audioPlayerError = "Audio Player Error"
     case noRecordingPlayTapped = "Record an audio first"
     case inRecordingPlayTapped = "Stop the recording first"
+    case audioFormatFail = "Can't convert to audio format"
     
     case permissionDenied = "Permission Denied"
 }
